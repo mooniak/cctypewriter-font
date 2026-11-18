@@ -1,0 +1,14 @@
+# CCTypewriter deviations from the FM Abhaya layout (encodings/fm-abhaya.tsv in mooniak-font-tools).
+# Each was checked by eye: glyph chart, the drawing next to its FM neighbours, and the same keys in FM Abhaya (2026-11-18). Same columns as the table.
+key	unicode	text	role	name	context	note
+C	U+0D9A U+0DCA U+200D U+0DC2	ක්‍ෂ				CCTypewriter draws the full ක්‍ෂ here (ක touching ෂ, 990 wide); FM has the touching first half ක්‍ (C+I = ක්‍ෂ) and ක්‍ෂ on Ë, which this Latin-1 font lacks. Visual
+F	U+0DAD U+0DCA U+200D U+0DC0	ත්‍ව				CCTypewriter draws the full ත්‍ව here (936 wide); FM has the touching first half ත්‍ (F+j = ත්‍ව). Visual
+J	U+0DB1 U+0DCA U+200D U+0DAF	න්‍ද				CCTypewriter draws the full න්‍ද here (න touching ද, with ද's tail); FM has the touching first half න්‍ and න්‍ද on ‡, which this font lacks. Visual
+Ù	U+0DAC U+0DCA	ඬ්				CCTypewriter swaps Ù and å: Ù has the nasal curl and cross-stroke of ඬ (~) with the joined al-lakuna. FM Abhaya draws ඞ් here. Visual
+å	U+0D9E U+0DCA	ඞ්				CCTypewriter swaps Ù and å: å has the body of ඞ (X), no nasal curl. FM Abhaya draws ඬ් here. Visual
+_	U+0DD3	ී	alt	iisign-sinh.alt1		A compact second ී (small loop and curl, overprinting the letter before it), as FM Abhaya also has on _ (Pandukabhaya has no _). Nothing reaches it: designer to decide where it is used
+µ	U+0DF3	ෳ				CCTypewriter draws a spacing g-like sign here, the shape of ෳ (diga gayanukitta), which the font otherwise lacks; Pandukabhaya has µ = roman i. Visual, medium confidence: designer to confirm
+¶	U+E001		latin	uniE001		CCTypewriter: an unidentified letter-like glyph (a stem with a top loop and a bowl; near ශ / හ but neither). Kept typable on PUA U+E001; designer to identify. Pandukabhaya has ¶ = roman v
+Û	U+E000		latin	logo		CCTypewriter: the designer's "Ceylon Calligraphy" logo in Sinhala script (1000 wide), like the Pushpa logo FM Abhaya has on Û. Kept typable on PUA U+E000; designer to decide
+`P			skip			FM table composes ඦ from ` + P (ඡ), which draws nasal + ඡ; ඦ U+0DA6 sanyaka jayanna is nasal + ජ. Composed from `c instead (below). General FM correction, proposed for build_fm_abhaya.py
+`c	U+0DA6	ඦ				ඦ = nasal prefix + ජ (c). Replaces the table's `P
