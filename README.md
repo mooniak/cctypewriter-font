@@ -1,101 +1,203 @@
-## Setting up your font
+CCTypewriter
+============
 
-### New repositories
+[![Build][badge-build]][link-build]
+[![Fontspector QA][badge-qa]][link-qa]
+[![Release][badge-release]][link-release]
+[![License: OFL 1.1][badge-license]][link-license]
 
-1. Hit the green button above ("Use this template") to create your own repository.
+[badge-build]: https://github.com/mooniak/cctypewriter-font/actions/workflows/build.yaml/badge.svg?branch=dev
+[badge-qa]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fsrc.mooniak.com%2Fcctypewriter-font%2Fbuild.json&query=%24.qa.pass_rate&suffix=%25&label=fontspector%20QA%20(dev%20build)&color=informational
+[badge-release]: https://img.shields.io/github/v/release/mooniak/cctypewriter-font?label=release
+[badge-license]: https://img.shields.io/badge/license-OFL--1.1-green
+[link-build]: https://github.com/mooniak/cctypewriter-font/actions/workflows/build.yaml
+[link-qa]: https://src.mooniak.com/cctypewriter-font/reports/fontspector/fontspector-report.html
+[link-release]: https://github.com/mooniak/cctypewriter-font/releases
+[link-license]: OFL.txt
 
-2. Clone the repository, and replace the font sources in the `sources` directory with your own font sources. These sources may be either in Glyphs format or UFO/Designspace formats.\
-   \
-   Unlike many open source distributors, Google Fonts is **curated**. Fonts shipped to the platform have to match the [Google Fonts Specifications](https://github.com/googlefonts/gf-docs/tree/main/Spec). Please read them carefully.\
-   \
-   _(The template ships a tiny generic placeholder — "My Font", a 2-master Weight variable font with a handful of blank-slate glyphs (`.notdef`, space, H, I, l, O) as `sources/MyFont.designspace` + UFOs. It exists only so the build pipeline works out of the box; replace it with your own sources.)_
+CCTypewriter is a monoline, round-ended Sinhala typeface in the manner of a typewriter by Damith Welikala (Ceylon Calligraphy), made in 2019.
+Its letters are drawn with one even, round-ended stroke, like the letters of a Sinhala typewriter, for headings, posters, packaging and short texts that want the plain, mechanical feel of typewritten Sinhala. It is published by [Mooniak](https://mooniak.com/) as a free font under the SIL Open
+Font License, in a single Regular weight.
 
-3. Then reference the sources in the file `sources/config.yaml`, as well as making any other changes you would like to make based on the instructions in the [Google Fonts Builder documentation](https://github.com/googlefonts/gftools/blob/main/Lib/gftools/builder/__init__.py).
+![CCTypewriter specimen](documentation/image1.png)
+![CCTypewriter character set](documentation/image2.png)
 
-4. Add yourself to the `AUTHORS.txt` and `CONTRIBUTORS.txt` files.
+## From an ASCII font to Unicode
 
-5. Fill out `documentation/ARTICLE.en_us.html` with a description of your font.
+CCTypewriter was first made in the **FM Abhaya ASCII layout**, the encoding most Sinhala fonts used
+before Unicode. Sinhala letters were drawn on Latin keys (`l` was ක, `s` the is-pilla drawn to
+overprint the letter before it, `f` the kombuva typed *before* the letter, `á` a precomposed ටි).
+Text typed that way only reads as Sinhala in that one font. Search, copy-paste, spell-checking
+and screen readers all see Latin gibberish.
 
-6. Rewrite this Readme file according to the recommendations in the [Google Fonts Guide](https://googlefonts.github.io/gf-guide/readmefile.html).
+In November 2026 the source was ported to Unicode with Mooniak's
+[`ascii_to_unicode.py`](https://github.com/mooniak/mooniak-font-tools/tree/main/tools/font-migration):
 
-7. Add and commit these files to git.
+- every glyph got its Sinhala code point or a [LankaGlyphset](https://github.com/mooniak/lanka-glyphsets)
+  name reached by OpenType rules (the precomposed ටි ඩී ද්‍ර … are ligatures now);
+- what FM typed as several keys (ආ = `wd`, ෛ = `ff`, රු = `re` …) is composed from the same drawings;
+- the overprinting signs have zero width and mark anchors that put them exactly where the
+  original drew them; the kombuva is reordered by the shaper, not typed first.
 
-8. **At the command line, run `make customize` to ensure that all the paths and URLs in your project are correct**. This will also push your changes to GitHub.
+Every decision is in [`documentation/ascii-unicode-map.tsv`](documentation/ascii-unicode-map.tsv).
+Where this font differs from the standard FM layout, it is in
+[`documentation/ascii-overrides.tsv`](documentation/ascii-overrides.tsv): `C` `F` `J` are the full conjuncts ක්‍ෂ ත්‍ව න්‍ද (in FM these are touching halves), `Ù` and `å` are swapped (ඬ් and ඞ්), `_` is a compact second ී (`iisign-sinh.alt1`), `µ` is ෳ (medium confidence), and ඦ is built from `` ` `` + ජ.
+The port was checked by rendering 1202 texts (every glyph slot, 915 syllables, 124 words of real FM text) in the old ASCII font and, as Unicode, in the new one: 1198 came out the same. The 4 others are expected: ÷ sat on the soft-hyphen slot, which is never drawn, and ඞේ ඡේ ඬේ use the font's own joined al-lakuna forms, matching the FM spellings exactly.
 
-9. **Set up your GitHub pages site**: go to your repository's Settings > Pages and ensure that the Build and deployment "Source" drop-down is set to "GitHub Actions". (Any preexisting Actions jobs can be re-run to publish now, or the deployment triggered also manually from the Actions tab. Subsequent commits will publish the proofs and QA results automatically.)
+**Old documents typed in the ASCII version** can be converted to Unicode text with
+[Pandukabhaya](https://github.com/akuruAI/Pandukabhaya) (`pandukabhaya fm_abhaya -i old.txt -o new.txt`).
 
-10. If GitHub Actions has successfully built the family, you will find the font binaries in the Actions tab. The official GitHub Actions documentation provides further [information](https://docs.github.com/en/actions/managing-workflow-runs/downloading-workflow-artifacts).
+## Get the font
 
-### Updating a repository
+- **Download:** the [Releases](https://github.com/mooniak/cctypewriter-font/releases) page. A
+  pre-release named `canary` is rebuilt from every push to `dev`. It is the latest development
+  work and may be broken, so don't use it in production. Its family name ends in `CANARY`, so it
+  can be installed next to a release.
+- **Proofs and QA:** the latest development build, with type proofs and the full Fontspector
+  report, is at [src.mooniak.com/cctypewriter-font](https://src.mooniak.com/cctypewriter-font/).
+- **Build it yourself:** see [Building the fonts from source](#building-the-fonts-from-source).
 
-1. To update your font repository to bring in the latest best-practices from the Google Fonts Project Template, run `make update-project-template` from the command line. This requires the `node` Javascript engine to be installed; if you don't have that already, [follow these instructions](https://nodejs.org/en/download/package-manager#macos) to install on your platform.
+## Font data
 
-2. To update the Python build chain which builds your fonts, run `make update` and `git add`/`git commit` the new `requirements.txt`.
+| | |
+|---|---|
+| **Version** | 1.000 |
+| **Script** | Sinhala (no Latin letters; digits and basic punctuation only) |
+| **Styles** | Regular |
+| **Formats** | TTF, OTF and WOFF2 (`CCTypewriter-Regular.*`) |
+| **Glyphs** | 183 (112 mapped to Unicode code points; the rest are ligatures and alternates used by OpenType features) |
+| **Units per em** | 1000 |
+| **Vertical metrics** | ascent 900, descent −300, line gap 0 (1.2 em; `hhea`, typo and win; `USE_TYPO_METRICS` on) |
+| **File size** | about 91 KB (TTF), 54 KB (OTF), 38 KB (WOFF2) |
+| **Source format** | [Glyphs](https://glyphsapp.com/) 3 package (`sources/CCTypewriter.glyphspackage`) |
+| **License** | [SIL Open Font License 1.1](OFL.txt) |
 
-## More things to do
+### Character coverage
 
-- `CustomFilter_GF_Latin_All.plist` in `sources` is practical if you use GlyphsApp, you can remove it otherwise. Placed in the same directory as the your `.glyphs` file, it will allow Glyphs to display a filter list for all GF Latin glyphsets in app. To make sure your font supports the minimal set required by Google Fonts, look at the `GF_Latin_Core` filter list. Find other glyphsets and list formats for different software in [GF Glyphsets repository](https://github.com/googlefonts/glyphsets/tree/main/GF_glyphsets).
+| Range | Encoded |
+|---|---|
+| Sinhala (U+0D80–0DFF) | 76 of 91. Not drawn: candrabindu U+0D81, ඏ ඐ U+0D8F–0D90, ඣ U+0DA3, kunddaliya U+0DF4, Lith digits U+0DE6–0DEF |
+| Basic Latin | space, digits 0–9 and `! % ( ) * + , - . / : ; = ?` |
+| Other | × ÷ – ‘ ’, no-break space, ZWNJ, ZWJ, dotted circle (U+25CC); the Ceylon Calligraphy logo on U+E000 and an unidentified letter on U+E001 (private use) |
 
-- Once you are happy with your font, add promotional assets in the documentation directory. Make it different from the pic you use in this README. You can get inspired by existing @googlefonts posts as: https://x.com/googlefonts/status/1415562928657416192.
+### OpenType features
 
-- Google Fonts uses GitHub Releases to manage font families. If you feel your font project has hit a milestone, you must create a new release for it. In order to do this, go to the releases page and hit the "Draft a new release" button. You must provide a tag number and title which can only be a decimal number e.g. `0.100`, `1.000` etc. For the body text, mention what has changed since the last release. Once you are done, hit the "Publish release" button. Here is an example which fulfills the requirements, https://github.com/m4rc1e/test-ufr-family/releases/tag/2.019. For more info regarding GitHub release, please see the official GitHub Release [documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository). **Please note that GitHub Actions must be able to build the fonts before you can make a release. Once you have made a release, the fonts and tests assets will be attached to the release automatically. This may take a while since the fonts and tests will be built from scratch so please be patient.**
+The features are generated by `ascii_to_unicode.py` from the glyphs the font has.
 
----
+| Layout table | Features |
+|---|---|
+| `GSUB` | `akhn` (ක්‍ෂ, ත්‍ව, න්‍ද) `vatu` (rakaransaya, yansaya, ද්‍ර) `pstf` (two-part vowels) `abvs` `blws` `psts` (consonant + sign ligatures, the hook-form ු/ූ after ක ග ත භ ශ, රු රූ) |
+| `GPOS` | `abvm` `mark` (ි ී ු ූ ් placed where the original drew them) |
 
-# My Font
+There is no repaya glyph: ර්‍ + consonant shows as ර් + consonant. Most conjuncts fall back to a letter with a visible al-lakuna, and some glyphs need the designer to confirm what they are.
 
-[![][Fontspector]](https://mooniak.github.io/mooniak-font-project-template.git/fontspector/fontspector-report.html)
-[![][OpenType]](https://mooniak.github.io/mooniak-font-project-template.git/fontspector/fontspector-report.html)
-[![][Universal]](https://mooniak.github.io/mooniak-font-project-template.git/fontspector/fontspector-report.html)
-[![][Google Fonts]](https://mooniak.github.io/mooniak-font-project-template.git/fontspector/fontspector-report.html)
-[![][Glyphset]](https://mooniak.github.io/mooniak-font-project-template.git/fontspector/fontspector-report.html)
+## Repository structure
 
-[Fontspector]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmooniak.github.io%2Fmooniak-font-project-template.git%2Fbadges%2FFontspectorQA.json
-[OpenType]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmooniak.github.io%2Fmooniak-font-project-template.git%2Fbadges%2FOpentypeSpecificationChecks.json
-[Universal]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmooniak.github.io%2Fmooniak-font-project-template.git%2Fbadges%2FUniversalProfileChecks.json
-[Google Fonts]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmooniak.github.io%2Fmooniak-font-project-template.git%2Fbadges%2FFontFileChecks.json
-[Outline Correctness]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmooniak.github.io%2Fmooniak-font-project-template.git%2Fbadges%2FOutlineCorrectnessChecks.json
-[Glyphset]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmooniak.github.io%2Fmooniak-font-project-template.git%2Fbadges%2FGlyphsetChecks.json
+| Path | What it is |
+|---|---|
+| `sources/CCTypewriter.glyphspackage` | The font source: glyphs, anchors and OpenType feature code, as a Glyphs 3 package |
+| `sources/config.yaml` | Build configuration read by [gftools](https://github.com/googlefonts/gftools) |
+| `fontpackage.json` | Mooniak catalogue metadata (name, designer, tier, channels) |
+| `Makefile` | Build, test and proof targets (see below) |
+| `requirements.in`, `requirements.txt` | Python dependencies: the top-level list, and the pinned set used for builds |
+| `fonts/`, `out/`, `_site/` | Build output, QA/proof reports and the proof site (created by `make`; not committed) |
+| `documentation/` | Specimen images and their DrawBot scripts, the font description (`ARTICLE.en_us.html`), and the ASCII → Unicode port records (`ascii-unicode-map.tsv`, `ascii-overrides.tsv`) |
+| `scripts/` | Helper scripts used by the Makefile and CI (from the Mooniak project template) |
+| `OFL.txt`, `AUTHORS.txt`, `CONTRIBUTORS.txt` | License and credits |
 
-Description of your font goes here. We recommend to start with a very short presentation line (the kind you would use on twitter to present your project for example), and then add as much details as necesary :-) Origin of the project, idea of usage, concept of creation… but also number of masters, axes, character sets, etc.
+## Building the fonts from source
 
-Don't hesitate to create images!
+Building needs only free, open-source tools. You need Glyphs only to edit the source, not to build.
 
-![Sample Image](documentation/image1.png)
-![Sample Image](documentation/image2.png)
+### Requirements
 
-## About
+- **macOS or Linux** (on Windows, use [WSL](https://learn.microsoft.com/windows/wsl/)).
+- **Python 3.12** with `venv` and `pip`, the version CI uses. The dependencies in
+  `requirements.txt` are pinned, and other Python versions may fail to install them.
+- **Make** and **git**, and network access for the first build.
 
-Description of you and/or organisation goes here.
+### Build
 
-## Building
+```sh
+git clone https://github.com/mooniak/cctypewriter-font.git
+cd cctypewriter-font
+python3.12 -m venv venv
+make build
+```
 
-Fonts are built automatically by GitHub Actions — take a look in the "Actions" tab for the latest build.
+`make build` installs the pinned dependencies into `venv/` (first run only), then runs
+[`gftools builder`](https://github.com/googlefonts/gftools) on `sources/config.yaml`. Output:
 
-If you want to build fonts manually on your own computer:
+```
+fonts/ttf/CCTypewriter-Regular.ttf
+fonts/otf/CCTypewriter-Regular.otf
+fonts/webfonts/CCTypewriter-Regular.woff2
+```
 
-- `make build` will produce font files.
-- `make test` will run [Fontspector](https://fonttools.github.io/fontspector/)'s quality assurance tests.
-- `make proof` will generate HTML proof files.
+Each rebuild deletes and recreates `fonts/`. `make` doesn't notice edits inside the package
+folder, so after editing the source run `rm build.stamp && make build`.
 
-The proof files and QA tests are also available automatically via GitHub Actions — look at https://mooniak.github.io/mooniak-font-project-template.git.
+### Quality checks and proofs
+
+These need two extra tools, installed with
+[`cargo binstall`](https://github.com/cargo-bins/cargo-binstall):
+
+```sh
+cargo binstall fontspector     # for `make test`
+cargo binstall diffenator3     # for `make proof`
+```
+
+| Command | What it does |
+|---|---|
+| `make test` | Runs [Fontspector](https://github.com/fonttools/fontspector) with the Google Fonts profile and writes reports to `out/fontspector/`. It doesn't stop on failures; read the report. |
+| `make proof` | Runs `diff3proof` and writes an HTML proof to `out/proof/`. |
+| `make pages` | Builds the stage-gated proof site into `_site/` (needs `make manifest` first). |
+| `make images` | Re-renders `documentation/image1.png` and `image2.png`. |
+| `make clean` | Deletes `venv/`. |
+
+Known Fontspector failures, shared by Mooniak's other Sinhala-only fonts: the Google Fonts Latin
+coverage, language-shaping and "render own name" checks (the font has no Latin letters), and the
+GF repository-layout check.
+
+## Releases and versioning
+
+Versions follow [OpenFV](https://github.com/openfv/openfv) (`MAJOR.MINOR`, three-digit minor).
+Work happens on `dev`; `main` only moves when a release is cut.
+
+| You want | Do this | CI publishes |
+|---|---|---|
+| the latest build | push to `dev` | the rolling `canary` pre-release and the proof site |
+| a fixed preview for testers | tag a `dev` commit `vX.YYY-dev.N` | a GitHub pre-release |
+| a release | merge `dev` into `main` (no squash), tag `main` `vX.YYY` | a GitHub Release |
+
+Bump `versionMajor`/`versionMinor` in the source before tagging. The next release after the
+2019 version 1.000 should be **1.001** or later.
+
+## Contributing
+
+Bug reports and design feedback are welcome in the
+[issue tracker](https://github.com/mooniak/cctypewriter-font/issues). Open pull requests against
+`dev`, edit `sources/CCTypewriter.glyphspackage` with Glyphs 3, rebuild
+(`rm build.stamp && make build`) and run `make test`. Add yourself to `CONTRIBUTORS.txt`.
+
+## Credits
+
+- **Design:** Damith Welikala, Ceylon Calligraphy (2019)
+- **Unicode port, production and publishing:** [Mooniak](https://mooniak.com/) (2026)
+- **FM Abhaya mapping data:** [Pandukabhaya](https://github.com/akuruAI/Pandukabhaya) (MIT)
 
 ## Changelog
 
-When you update your font (new version or new release), please report all notable changes here, with a date.
-[Font Versioning](https://github.com/googlefonts/gf-docs/tree/main/Spec#font-versioning) is based on semver.
-Changelog example:
+**18 November 2026, version 1.000 (development)**
 
-**26 May 2021. Version 2.13**
+- Ported from the FM Abhaya ASCII layout to Unicode: LankaGlyphset names, Sinhala code points,
+  composed vowels and ligatures, generated OpenType features, mark anchors.
+- Moved to the Mooniak build pipeline: Glyphs 3 package, gftools builds with CI, proofs and QA.
+- Added no-break space, ZWJ/ZWNJ and dotted circle; Google Fonts vertical metrics; Mooniak copyright, designer, vendor ID and OFL licence in the font.
 
-- MAJOR Font turned to a variable font.
-- SIGNIFICANT New Stylistic sets added.
+**2019, version 1.000.** Damith Welikala's original, an FM-layout ASCII font made in FontForge.
 
 ## License
 
-This Font Software is licensed under the SIL Open Font License, Version 1.1.
-This license is available with a FAQ at https://openfontlicense.org
-
-## Repository Layout
-
-This font repository structure is inspired by [Unified Font Repository v0.3](https://github.com/unified-font-repository/Unified-Font-Repository), modified for the Google Fonts workflow.
+This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is
+available with a FAQ at https://openfontlicense.org
