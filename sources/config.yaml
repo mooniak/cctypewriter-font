@@ -1,7 +1,7 @@
 # gftools-builder configuration. See:
 #   https://github.com/googlefonts/gftools/blob/main/Lib/gftools/builder/schema.py
 sources:
-  - CCTypewriter-ASCII.glyphspackage
+  - CCTypewriter.glyphspackage
 familyName: "CCTypewriter"
 outputDir: "../fonts"
 buildVariable: false
