@@ -1,0 +1,83 @@
+[
+ {
+  "family": "CCTypewriter",
+  "commit": "0f320fdad9e32efed762f4b5aaa915d92c622747",
+  "commit_short": "0f320fd",
+  "version": "1.000",
+  "generated_at": "2026-11-26T15:18:32Z",
+  "stage": {
+   "n": 1,
+   "name": "Bootstrap",
+   "cumulative": 9,
+   "total": 110,
+   "gate_met": true,
+   "kernel_checkable_complete": false,
+   "kernel_complete": null,
+   "unverified_kernel_entries": [
+    "classic-conjuncts",
+    "conjunct-i-forms",
+    "ksha",
+    "rakaransaya",
+    "repaya",
+    "yansaya"
+   ]
+  },
+  "qa": {
+   "profile": "mooniak",
+   "verdict": "warn",
+   "pass_rate": 76,
+   "counts": {
+    "WARN": 13,
+    "SKIP": 51,
+    "INFO": 12,
+    "PASS": 81
+   },
+   "total_checks": 157
+  },
+  "run_url": "https://github.com/mooniak/cctypewriter-font/actions/runs/45847521006",
+  "ref_name": "dev",
+  "channel": "canary",
+  "repository": "mooniak/cctypewriter-font"
+ },
+ {
+  "family": "CCTypewriter",
+  "commit": "2070e79b1d7ca2292c09fd41d0aed3225619d878",
+  "commit_short": "2070e79",
+  "version": "1.000",
+  "generated_at": "2026-11-18T18:28:20Z",
+  "stage": {
+   "n": 1,
+   "name": "Bootstrap",
+   "cumulative": 9,
+   "total": 110,
+   "gate_met": true,
+   "kernel_checkable_complete": false,
+   "kernel_complete": null,
+   "unverified_kernel_entries": [
+    "classic-conjuncts",
+    "conjunct-i-forms",
+    "ksha",
+    "rakaransaya",
+    "repaya",
+    "yansaya"
+   ]
+  },
+  "qa": {
+   "profile": "googlefonts",
+   "verdict": "fail",
+   "pass_rate": 69,
+   "counts": {
+    "FAIL": 4,
+    "WARN": 18,
+    "SKIP": 86,
+    "INFO": 20,
+    "PASS": 94
+   },
+   "total_checks": 222
+  },
+  "run_url": "https://github.com/mooniak/cctypewriter-font/actions/runs/44368602754",
+  "ref_name": "dev",
+  "channel": "canary",
+  "repository": "mooniak/cctypewriter-font"
+ }
+]

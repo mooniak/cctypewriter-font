@@ -1,0 +1,168 @@
+{
+  "id": "cctypewriter",
+  "family": "CCTypewriter",
+  "scripts": [
+    "Sinh"
+  ],
+  "version": "1.000",
+  "channel": "canary",
+  "commit": "2070e79b1d7ca2292c09fd41d0aed3225619d878",
+  "commit_short": "2070e79",
+  "ref_name": "dev",
+  "repository": "mooniak/cctypewriter-font",
+  "run_url": "https://github.com/mooniak/cctypewriter-font/actions/runs/44368602754",
+  "actor": "pathumego",
+  "generated_at": "2026-11-18T18:28:20Z",
+  "qa": {
+    "profile": "googlefonts",
+    "verdict": "fail",
+    "pass_rate": 69,
+    "counts": {
+      "FAIL": 4,
+      "WARN": 18,
+      "SKIP": 86,
+      "INFO": 20,
+      "PASS": 94
+    },
+    "total_checks": 222
+  },
+  "stage": {
+    "n": 1,
+    "name": "Bootstrap",
+    "cumulative": 9,
+    "total": 110,
+    "gate_met": true,
+    "kernel_checkable_complete": false,
+    "kernel_complete": null,
+    "unverified_kernel_entries": [
+      "classic-conjuncts",
+      "conjunct-i-forms",
+      "ksha",
+      "rakaransaya",
+      "repaya",
+      "yansaya"
+    ]
+  },
+  "files": [
+    {
+      "path": "fonts/otf/CCTypewriterCANARY-Regular.otf",
+      "format": "otf",
+      "bytes": 57788,
+      "sha256": "3b9572b05bea45dea872a4b2bad4c101ac76413ab09f6c3350cfffaf97f34dc4",
+      "style": "Regular",
+      "kind": "static"
+    },
+    {
+      "path": "fonts/ttf/CCTypewriterCANARY-Regular.ttf",
+      "format": "ttf",
+      "bytes": 95272,
+      "sha256": "d3cbdcd0fb0c85af1378252f0fa369295293003ba5849666832debe4140e237f",
+      "style": "Regular",
+      "kind": "static"
+    },
+    {
+      "path": "fonts/webfonts/CCTypewriterCANARY-Regular.woff2",
+      "format": "woff2",
+      "bytes": 40216,
+      "sha256": "dd5f8728b703881749b381908c85e668a8d1ee2f493ba982f25f9f42f829dd4c",
+      "style": "Regular",
+      "kind": "static"
+    }
+  ],
+  "proof_gate": {
+    "stage": 1,
+    "gated": true,
+    "shown": [
+      "shape-groups",
+      "sinhala-alphabet",
+      "spacing_strings",
+      "test-texts-stages"
+    ],
+    "withheld": [
+      [
+        "classical-texts",
+        9
+      ],
+      [
+        "conjuncts",
+        9
+      ],
+      [
+        "devanagari-pangram",
+        9
+      ],
+      [
+        "display-strings",
+        4
+      ],
+      [
+        "indo-arabic-numerals",
+        4
+      ],
+      [
+        "kern-pairs",
+        3
+      ],
+      [
+        "libreoffice-ui-strings",
+        4
+      ],
+      [
+        "marks",
+        5
+      ],
+      [
+        "mixed-script",
+        9
+      ],
+      [
+        "multiscript",
+        9
+      ],
+      [
+        "numerals",
+        4
+      ],
+      [
+        "ot-features",
+        9
+      ],
+      [
+        "pali-and-sanskrit-words",
+        9
+      ],
+      [
+        "prose",
+        4
+      ],
+      [
+        "punctuation",
+        4
+      ],
+      [
+        "rakar",
+        9
+      ],
+      [
+        "signs-combinations",
+        5
+      ],
+      [
+        "sinhala-pangram",
+        3
+      ],
+      [
+        "structured-texts",
+        4
+      ],
+      [
+        "tamil-pangram",
+        9
+      ]
+    ],
+    "missing_for_next": [
+      "fam-i-term"
+    ],
+    "scripts": []
+  }
+}
